@@ -6,7 +6,7 @@ import psutil
 # create app
 app = Flask(__name__)
 application = app
-#app.config["REDIS_URL"] = "redis://sr1:6379"
+app.config["REDIS_URL"] = "redis://redis-container:6379"
 redis_client = FlaskRedis(app)
 
 # analyze and elaborate the provided VHDL file
