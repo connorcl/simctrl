@@ -5,6 +5,7 @@ import psutil
 
 # create app
 app = Flask(__name__)
+application = app
 #app.config["REDIS_URL"] = "redis://sr1:6379"
 redis_client = FlaskRedis(app)
 
@@ -30,7 +31,7 @@ def start():
     else:
         #proc = subprocess.Popen(["ghdl-llvm", "-r", "gpio_test", "--vpi=./vpi_test.vpi"])
         # launch simulation
-        proc = subprocess.Popen(["ghdl-llvm", "-r", "gpio_test", "--vpi=/vpi_build/sim.vpi"])
+        proc = subprocess.Popen(["ghdl-llvm", "-r", "gpio_test", "--vpi=./fpgasim.vpi"])
         # record PID of simulation process
         redis_client.set('pid', proc.pid)
         # set return data
