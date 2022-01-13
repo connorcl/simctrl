@@ -23,13 +23,12 @@ def start():
     pid = redis_client.get('pid')
     
     if not uploaded:
-        code = 1
+        code = 2
         msg = "No VHDL file uploaded!"
     elif pid:
         code = 1
         msg = "Simulation already started!"
     else:
-        #proc = subprocess.Popen(["ghdl-llvm", "-r", "gpio_test", "--vpi=./vpi_test.vpi"])
         # launch simulation
         proc = subprocess.Popen(["ghdl-llvm", "-r", "gpio_test", "--vpi=./fpgasim.vpi"])
         # record PID of simulation process
@@ -58,7 +57,7 @@ def stop():
             msg = "Simulation stopped successfully!"
         except:
             # something went wrong
-            code = 1
+            code = 2
             msg = "Error stopping simulation!"
         finally:
             # remove PID from database
